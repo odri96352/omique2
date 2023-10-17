@@ -1,4 +1,6 @@
 from Bio import SeqIO
+import cProfile
+
 
 def asciiDC3 (seq) :
     asc=[]
@@ -227,6 +229,9 @@ def almost_dc3(T):
     index012=removesentinel(merge(T, index0, index12))
     return index012
 
+
+
+
 def parseFile(name, type,dollar=False):
     #parses a given file of a given data structure
     #returns a list of every sequence as a SEQIO object
@@ -245,9 +250,12 @@ def parseFile(name, type,dollar=False):
 
 if __name__=="__main__":
     #genome, nucleotide_genome=parseFile("/home/azarkua/Documents/2023-2024/omiques2/developement/omique2/genome.fna", "fasta")
-    reads,nucleotide_reads=parseFile("/home/azarkua/Documents/2023-2024/omiques2/developement/omique2/reads.fq", "fastq")
+    #reads,nucleotide_reads=parseFile("/home/azarkua/Documents/2023-2024/omiques2/developement/omique2/reads.fq", "fastq")
     # la consigne nous recommande de réfléchir à une structure de donnée adéquate ...
-    temp=reads[1].seq.upper()
+
+    #temp=reads[1].seq.upper()
+    temp="TATATCTTTAAAATGATGTTGCAAATTTATTGAACATGTTAATAAATCATCCTGTTCATTTTGTATGTCTACTAAATTATGTAACGTATCCTCTTCTTCA"
     temp[50:60]
     T=asciiDC3(temp)
+    cProfile.run("almost_dc3(temp)")
     print(almost_dc3(T)[:100])
